@@ -63,8 +63,14 @@ public class MainActivity extends AppCompatActivity {
                         String json = response.body().string();
                         res = gson.fromJson(json, Res.class);
                         Log.d(TAG, "Error!!!");
-                        RestoAdapter ra = new RestoAdapter(getApplicationContext(), res.getNearby_restaurants());
-                        rc.setAdapter(ra);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RestoAdapter ra = new RestoAdapter(getApplicationContext(), res.getNearby_restaurants());
+                                rc.setAdapter(ra);
+                            }
+                        });
+
                     }else{
                      Log.d(TAG, "ERROR, IN RESPONSE, CHECK WITH API PROVIDER!");
                     }

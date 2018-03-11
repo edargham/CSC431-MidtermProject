@@ -27,11 +27,11 @@ public class ZomatoApiManager {
                 .addPathSegment("geocode")
                 .addQueryParameter("lat", String.valueOf(latitude))
                 .addQueryParameter("lon", String.valueOf(longtitude))
-                .addQueryParameter("user-key", "1790d789c593b2e68c6fd677fcfdd501")
                 .build();
 
         Request req = new Request.Builder()
                 .url(url)
+                .addHeader("user-key", "1790d789c593b2e68c6fd677fcfdd501")
                 .build();
 
         return client.newCall(req);
