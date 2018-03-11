@@ -26,7 +26,7 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
 
     @Override
     public RestoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_view, null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_view, parent, false);
         return new RestoViewHolder(view);
     }
 
