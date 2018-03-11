@@ -61,7 +61,12 @@ public class MainActivity extends AppCompatActivity {
                     if(response.isSuccessful()){
                         Log.d(TAG, "Success");
                         String json = response.body().string();
+                        Log.d(TAG, "JSON OUTPUT:\n" + json);
                         res = gson.fromJson(json, Res.class);
+                        Log.d(TAG, "Nearby Restaurants: ");
+                        for(int i = 0; i< res.getNearby_restaurants().size(); i++){
+                            Log.d(TAG, res.getNearby_restaurants().get(i).getRestaurant().getName());
+                        }
                         Log.d(TAG, "Error!!!");
                         runOnUiThread(new Runnable() {
                             @Override

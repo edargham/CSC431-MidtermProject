@@ -1,12 +1,16 @@
 package com.example.edargham.restoview;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by eliasdargham on 3/11/18.
  */
 
 public class UserRating {
 
+    @SerializedName("aggregate_rating")
     private String average_rating;
+    @SerializedName("rating_text")
     private String rating_text;
 
     public UserRating(String ar, String rt){

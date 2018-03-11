@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by eliasdargham on 3/11/18.
@@ -15,10 +15,10 @@ import java.util.ArrayList;
 
 public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHolder> {
 
-    ArrayList<Restaurant> restorants;
+    List<Container> restorants;
     Context context;
 
-    public RestoAdapter(Context con, ArrayList<Restaurant> restos) {
+    public RestoAdapter(Context con, List<Container> restos) {
         restorants = restos;
         context = con;
     }
@@ -32,11 +32,11 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
 
     @Override
     public void onBindViewHolder(RestoViewHolder holder, int position) {
-        Restaurant resto = restorants.get(position);
-        holder.name.setText(resto.getName());
-        holder.cuisine.setText(resto.getCuisine());
-        holder.rating.setText(resto.getUser_rating().getAverage_rating());
-        holder.ratingText.setText(resto.getUser_rating().getRating_text());
+        Container resto = restorants.get(position);
+        holder.name.setText(resto.getRestaurant().getName());
+        holder.cuisine.setText(resto.getRestaurant().getCuisine());
+        holder.rating.setText(resto.getRestaurant().getUser_rating().getAverage_rating());
+        holder.ratingText.setText(resto.getRestaurant().getUser_rating().getRating_text());
 
     }
 

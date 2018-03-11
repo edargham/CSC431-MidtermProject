@@ -1,12 +1,16 @@
 package com.example.edargham.restoview;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by eliasdargham on 3/11/18.
  */
 
 public class Restaurant {
 
+    @SerializedName("name")
     private String name;
+    @SerializedName("cuisines")
     private String cuisine;
     private UserRating user_rating;
 
