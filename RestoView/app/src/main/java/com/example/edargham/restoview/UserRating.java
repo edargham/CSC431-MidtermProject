@@ -2,11 +2,13 @@ package com.example.edargham.restoview;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by eliasdargham on 3/11/18.
  */
 
-public class UserRating {
+public class UserRating implements Serializable{
 
     @SerializedName("aggregate_rating")
     private String average_rating;

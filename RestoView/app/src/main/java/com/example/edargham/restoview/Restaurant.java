@@ -2,11 +2,13 @@ package com.example.edargham.restoview;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by eliasdargham on 3/11/18.
  */
 
-public class Restaurant {
+public class Restaurant implements Serializable {
 
     @SerializedName("name")
     private String name;

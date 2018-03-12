@@ -157,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                 Intent intent = new Intent(getApplicationContext(), RestoInfo.class);
+                intent.putExtra("Restos", res);
+                intent.putExtra("Position", position);
                 startActivity(intent);
 
 

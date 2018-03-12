@@ -1,10 +1,12 @@
 package com.example.edargham.restoview;
 
+import java.io.Serializable;
+
 /**
  * Created by eliasdargham on 3/12/18.
  */
 
-public class Location {
+public class Location implements Serializable{
 
     private String address;
     private String locality;
