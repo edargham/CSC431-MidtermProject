@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.edargham.restoview.utils.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -40,7 +41,11 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
         holder.cuisine.setText(resto.getRestaurant().getCuisine());
         holder.rating.setText(resto.getRestaurant().getUser_rating().getAverage_rating());
         holder.ratingText.setText(resto.getRestaurant().getUser_rating().getRating_text());
-        Picasso.with(context).load(resto.getRestaurant().getImgUrl()).into(holder.imgView);
+        Picasso
+                .with(context)
+                .load(resto.getRestaurant().getImgUrl())
+                .transform(new CircleTransform())
+                .into(holder.imgView);
 
     }
 

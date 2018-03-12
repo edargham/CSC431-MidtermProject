@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             lm.removeUpdates(listener);
 
             Log.d(TAG, "Hello, World!");
-            zam.getRestaurantsAtLocation(lat,lon).enqueue(new Callback() {
+            zam.getRestaurantsAtLocation(lat, lon).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Log.d(TAG, "Fail");
@@ -58,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     Log.d(TAG, "Request Reached!");
-                    if(response.isSuccessful()){
+                    if (response.isSuccessful()) {
                         Log.d(TAG, "Success");
                         String json = response.body().string();
                         Log.d(TAG, "JSON OUTPUT:\n" + json);
                         res = gson.fromJson(json, Res.class);
                         Log.d(TAG, "Nearby Restaurants: ");
-                        for(int i = 0; i< res.getNearby_restaurants().size(); i++){
+                        for (int i = 0; i < res.getNearby_restaurants().size(); i++) {
                             Log.d(TAG, res.getNearby_restaurants().get(i).getRestaurant().getName());
                         }
                         Log.d(TAG, "Error!!!");
@@ -76,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
-                    }else{
-                     Log.d(TAG, "ERROR, IN RESPONSE, CHECK WITH API PROVIDER!");
+                    } else {
+                        Log.d(TAG, "ERROR, IN RESPONSE, CHECK WITH API PROVIDER!");
                     }
                 }
             });
@@ -129,12 +131,15 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "Got Activity");
         rc = findViewById(R.id.recycle);
-        rc.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+            rc.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        else
+       rc.setLayoutManager(new GridLayoutManager(this, 2));
         Log.d(TAG, "Initailized Recycler View");
         lm.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 0, 0, listener);
         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
-        Log.d(TAG,"UPDATING LOCATION");
+        Log.d(TAG, "UPDATING LOCATION");
     }
 
     private void requestFineLocationPermission() {
