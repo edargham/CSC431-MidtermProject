@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,6 +40,7 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
         holder.cuisine.setText(resto.getRestaurant().getCuisine());
         holder.rating.setText(resto.getRestaurant().getUser_rating().getAverage_rating());
         holder.ratingText.setText(resto.getRestaurant().getUser_rating().getRating_text());
+        Picasso.with(context).load(resto.getRestaurant().getImgUrl()).into(holder.imgView);
 
     }
 
@@ -51,6 +55,7 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
         TextView cuisine;
         TextView rating;
         TextView ratingText;
+        ImageView imgView;
 
         public RestoViewHolder(View view){
             super(view);
@@ -58,6 +63,7 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
             cuisine = view.findViewById(R.id.cuisine);
             rating = view.findViewById(R.id.rating);
             ratingText = view.findViewById(R.id.textrate);
+            imgView  = view.findViewById(R.id.restoicon);
         }
     }
 }

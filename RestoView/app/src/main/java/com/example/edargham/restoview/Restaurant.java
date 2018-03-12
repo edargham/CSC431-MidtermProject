@@ -12,14 +12,26 @@ public class Restaurant {
     private String name;
     @SerializedName("cuisines")
     private String cuisine;
+    @SerializedName("thumb")
+    private String imgUrl;
     private UserRating user_rating;
 
-    public Restaurant(String Name, String Cuisine, String average_rating, String rating_text){
+    public Restaurant(String Name, String Cuisine, String thumb, String average_rating, String rating_text){
 
         name = Name;
         cuisine = Cuisine;
+        imgUrl = thumb;
         user_rating = new UserRating(average_rating, rating_text);
 
+
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUurl) {
+        this.imgUrl = imgUurl;
     }
 
     public String getName() {
