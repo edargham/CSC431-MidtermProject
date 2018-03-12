@@ -15,13 +15,16 @@ public class Restaurant {
     @SerializedName("thumb")
     private String imgUrl;
     private UserRating user_rating;
+    private Location location;
 
-    public Restaurant(String Name, String Cuisine, String thumb, String average_rating, String rating_text){
+    public Restaurant(String Name, String Cuisine, String thumb, String average_rating, String rating_text,
+                      String address, String locality, String city){
 
         name = Name;
         cuisine = Cuisine;
         imgUrl = thumb;
         user_rating = new UserRating(average_rating, rating_text);
+        location = new Location(address, locality, city);
 
 
     }
@@ -56,5 +59,13 @@ public class Restaurant {
 
     public void setUser_rating(UserRating user_rating) {
         this.user_rating = user_rating;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

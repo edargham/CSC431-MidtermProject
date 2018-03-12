@@ -21,17 +21,26 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
 
     List<Container> restorants;
     Context context;
+    OnItemClickListener icl;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
 
     public RestoAdapter(Context con, List<Container> restos) {
         restorants = restos;
         context = con;
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener){
+            icl = listener;
+    }
+
 
     @Override
     public RestoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_view, parent, false);
-        return new RestoViewHolder(view);
+        return new RestoViewHolder(view, icl);
     }
 
     @Override
@@ -49,8 +58,10 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
 
     }
 
+
     @Override
     public int getItemCount() {
+
         return restorants.size();
     }
 
@@ -62,13 +73,24 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoViewHol
         TextView ratingText;
         ImageView imgView;
 
-        public RestoViewHolder(View view){
+        public RestoViewHolder(View view, final OnItemClickListener listen){
             super(view);
             name = view.findViewById(R.id.name);
             cuisine = view.findViewById(R.id.cuisine);
             rating = view.findViewById(R.id.rating);
             ratingText = view.findViewById(R.id.textrate);
             imgView  = view.findViewById(R.id.restoicon);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listen != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listen.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

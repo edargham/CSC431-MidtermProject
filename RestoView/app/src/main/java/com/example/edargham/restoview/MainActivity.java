@@ -3,6 +3,7 @@ package com.example.edargham.restoview;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Location;
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 RestoAdapter ra = new RestoAdapter(getApplicationContext(), res.getNearby_restaurants());
+                                buildRecyclerView(ra);
                                 rc.setAdapter(ra);
                             }
                         });
@@ -146,6 +148,20 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION
         }, LOCATION_PERMISSION);
+    }
+
+    public void buildRecyclerView(RestoAdapter ra){
+        ra.setOnItemClickListener(new RestoAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+
+                Intent intent = new Intent(getApplicationContext(), RestoInfo.class);
+                startActivity(intent);
+
+
+            }
+        });
     }
 
 }
